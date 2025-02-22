@@ -21,5 +21,8 @@
   },
   "modulePaths": [
     "<rootDir>"
+  ],
+  "setupFilesAfterEnv": [
+    "<rootDir>/test/setup.ts"
   ]
 }
