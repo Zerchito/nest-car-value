@@ -53,10 +53,8 @@ describe('AuthService', () => {
     fakeUsersService.find = () =>
       Promise.resolve([{ id: 1, email: 'a', password: '1' } as User]);
 
-    expect(service.signup('test2@test.com', 'password'))
-      .rejects.toThrow(
-        BadRequestException,
-      );
+    await expect(service.signup('test2@test.com', 'password'))
+      .rejects.toThrow(BadRequestException);
   });
 
   it('Thorws if signin is called with an unused email', async () => {

@@ -1,23 +1,21 @@
 import type { Config } from "jest";
 
+// Unit tests only (src/**/*.spec.ts). E2E tests use test/jest-e2e.json.
 const config: Config = {
-  preset: "ts-jest",
   testEnvironment: "node",
   moduleFileExtensions: ["js", "json", "ts"],
   rootDir: "./",
-  testRegex: ".spec.ts$",
+  roots: ["<rootDir>/src"],
+  testRegex: ".*\\.spec\\.ts$",
   transform: {
-    "^.+\\.(t|j)s$": "ts-jest",
+    "^.+\\.(t|j)s$": ["ts-jest", { tsconfig: "tsconfig.json" }],
   },
   moduleNameMapper: {
     "^src/(.*)$": "<rootDir>/src/$1",
   },
   modulePaths: ["<rootDir>"],
-  globals: {
-    "ts-jest": {
-      tsconfig: "tsconfig.json",
-    },
-  },
+  collectCoverageFrom: ["src/**/*.(t|j)s"],
+  coverageDirectory: "coverage",
 };
 
 export default config;
