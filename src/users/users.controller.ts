@@ -69,7 +69,7 @@ export class UsersController {
     return this.usersService.find(email);
   }
 
-  @Delete('/id')
+  @Delete('/:id')
   removeUser(@Param('id') id: string) {
     return this.usersService.remove(parseInt(id));
   }
