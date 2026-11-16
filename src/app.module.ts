@@ -33,7 +33,17 @@ const cookieSession = require('cookie-session');
     //   entities: [User, Report],
     //   synchronize: true,
     // }),
-    TypeOrmModule.forRoot(),
+    // TypeORM 0.3 no longer reads ormconfig.js, so the connection is configured here
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => ({
+        type: 'sqlite',
+        database: config.get<string>('DB_NAME'),
+        entities: [User, Report],
+        // The e2e setup deletes test.sqlite before each test, so tables must be recreated
+        synchronize: process.env.NODE_ENV === 'test',
+      }),
+    }),
     UsersModule,
     ReportsModule
   ],
