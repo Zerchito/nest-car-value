@@ -12,7 +12,7 @@ A REST API built with **NestJS** that estimates the market value of a used car f
 
 - **Authentication:** sign up, sign in and sign out with cookie-based sessions. Passwords are hashed with salted `scrypt`.
 - **Price reports:** signed-in users submit what they paid for a car (make, model, year, mileage, location, price).
-- **Admin approval:** an admin guard protects the endpoint that approves or rejects reports.
+- **Admin approval:** an admin guard protects the endpoint that approves or rejects reports. New users are not admins; an admin is promoted directly in the database.
 - **Estimates:** the estimate averages approved reports for the same make and model, of a similar year and location, giving priority to cars with similar mileage.
 - **Clean responses:** a custom `@Serialize()` interceptor uses DTOs to control exactly which fields leave the API (for example, password hashes are never returned).
 - **Validation:** a global `ValidationPipe` with whitelisting and `class-validator` DTOs.
